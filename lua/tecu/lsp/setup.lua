@@ -20,7 +20,7 @@ local servers = {
 	"eslint",
 
 	-- Python
-	"pylsp",
+	-- "pylsp",
 
 	-- JSON/YAML
 	"jsonls",
@@ -85,10 +85,12 @@ function M.setup()
 
 		"yamlfmt",
 
-		"gofumpt",
-		"goimports",
-		"goimports-reviser",
-		"golines",
+		"gofmt",
+
+		-- "gofumpt",
+		-- "goimports",
+		-- "goimports-reviser",
+		-- "golines",
 
 		"rubocop",
 
@@ -96,8 +98,8 @@ function M.setup()
 
 		"sqlfmt",
 
-		"black",
-		"isort",
+		-- "black",
+		-- "isort",
 
 		-- Linters
 		"eslint_d",
@@ -106,15 +108,15 @@ function M.setup()
 		"jsonlint",
 		"markdownlint",
 
-		"pylint",
+		-- "pylint",
 
 		"shellcheck",
 
-		"revive",
+		-- "revive",
 		"golangci-lint",
 
-		"pylint",
-		"flake8",
+		-- "pylint",
+		-- "flake8",
 
 		-- DAP
 	}

@@ -390,7 +390,7 @@ return {
 
 				rust = { "rustfmt" },
 
-				sh = { "shfmt" },
+				-- sh = { "shfmt" },
 				["*"] = { "trim_whitespace" },
 			},
 			format_on_save = function(bufnr)
@@ -434,7 +434,7 @@ return {
 
 				bash = { "shellcheck" },
 				sh = { "shellcheck" },
-				make = { "checkmate" },
+				-- make = { "checkmate" },
 			}
 
 			-- Create autocommand which carries out the actual linting

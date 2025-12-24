@@ -292,13 +292,13 @@ autocmd({ "BufNewFile", "BufRead" }, {
 	command = "setfiletype dockerfile",
 })
 
--- .env file detection
-autocmd({ "BufNewFile", "BufRead" }, {
-	group = general,
-	pattern = { ".env*" },
-	desc = "Detect .env files",
-	command = "setfiletype sh",
-})
+-- -- .env file detection
+-- autocmd({ "BufNewFile", "BufRead" }, {
+-- 	group = general,
+-- 	pattern = { ".env*" },
+-- 	desc = "Detect .env files",
+-- 	command = "setfiletype sh",
+-- })
 
 -- ============================================================================
 -- Terminal Specific
