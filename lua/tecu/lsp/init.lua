@@ -207,8 +207,9 @@ end
 function M.on_detach(event)
 	local bufnr = event.buf
 	vim.lsp.buf.clear_references()
-	vim.api.nvim_clear_autocmds({ group = "LspDocumentHighlight", buffer = bufnr })
-	vim.api.nvim_clear_autocmds({ group = "LspCodeLens", buffer = bufnr })
+	-- Safely clear autocmds only if groups exist
+	pcall(vim.api.nvim_clear_autocmds, { group = "LspDocumentHighlight", buffer = bufnr })
+	pcall(vim.api.nvim_clear_autocmds, { group = "LspCodeLens", buffer = bufnr })
 end
 
 -- ============================================================================

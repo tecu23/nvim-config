@@ -14,6 +14,8 @@ return {
 			"css",
 			"dockerfile",
 			"go",
+			"hcl", -- Terraform/HCL
+			"helm", -- Kubernetes Helm
 			"html",
 			"javascript",
 			"lua",
@@ -24,11 +26,13 @@ return {
 			"python",
 			"regex",
 			"sql",
+			"terraform", -- Terraform
 			"typescript",
 			"tsx",
 			"tmux",
 			"vim",
 			"vimdoc",
+			"yaml",
 		},
 		-- Autoinstall languages that are not installed
 		auto_install = true,

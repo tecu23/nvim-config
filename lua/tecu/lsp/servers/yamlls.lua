@@ -4,7 +4,7 @@
 
 return {
 	cmd = { "yaml-language-server", "--stdio" },
-	filetypes = { "yaml", "yaml.docker-compose", "yml" },
+	filetypes = { "yaml", "yaml.docker-compose", "yaml.kubernetes", "yml" },
 	settings = {
 		yaml = {
 			hover = true,
@@ -50,16 +50,14 @@ return {
 			vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = "YAML: " .. desc })
 		end
 
-		-- Schema selection
-		map("n", "<leader>ys", function()
-			vim.ui.input({ prompt = "Schema: " }, function(input)
-				if input then
-					vim.lsp.buf.execute_command({
-						command = "yaml.select.schema",
-						arguments = { input },
-					})
-				end
-			end)
-		end, "Select schema")
+		-- Show current schema
+		map("n", "<leader>yi", function()
+			vim.notify("YAML LSP attached with Kubernetes schema support", vim.log.levels.INFO)
+		end, "Show YAML info")
+
+		-- Validate YAML
+		map("n", "<leader>yv", function()
+			vim.lsp.buf.code_action()
+		end, "Validate YAML")
 	end,
 }

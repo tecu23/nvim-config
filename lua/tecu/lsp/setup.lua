@@ -39,6 +39,10 @@ local servers = {
 	-- SQL
 	"sqls",
 
+	-- Infrastructure as Code
+	"terraformls", -- Terraform
+	"helm_ls", -- Kubernetes Helm charts
+
 	-- Prisma
 	-- "prismals",
 
@@ -115,6 +119,10 @@ function M.setup()
 
 		-- "pylint",
 		-- "flake8",
+
+		-- Infrastructure as Code
+		"tflint", -- Terraform linter
+		"tfsec", -- Terraform security scanner
 
 		-- DAP
 	}

@@ -51,7 +51,9 @@
   "ts-comments.nvim": { "branch": "main", "commit": "1bd9d0ba1d8b336c3db50692ffd0955fe1bb9f0c" },
   "typescript-tools.nvim": { "branch": "master", "commit": "3c501d7c7f79457932a8750a2a1476a004c5c1a9" },
   "vague.nvim": { "branch": "main", "commit": "087ff41d1b4d90e7b64e1c97860700fa6b7f0daf" },
+  "vim-terraform": { "branch": "master", "commit": "520498fab16a3a11f2ae1b8cb65e0a1684bc317a" },
   "vim-tmux-navigator": { "branch": "master", "commit": "c45243dc1f32ac6bcf6068e5300f3b2b237e576a" },
   "vim-visual-multi": { "branch": "master", "commit": "a6975e7c1ee157615bbc80fc25e4392f71c344d4" },
-  "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" }
+  "which-key.nvim": { "branch": "main", "commit": "370ec46f710e058c9c1646273e6b225acf47cbed" },
+  "yaml.nvim": { "branch": "main", "commit": "e70ee49f7aefc79dce020d3ffc3c9447b0c52236" }
 }

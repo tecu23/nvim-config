@@ -291,6 +291,66 @@ autocmd({ "BufNewFile", "BufRead" }, {
 	command = "setfiletype dockerfile",
 })
 
+-- ============================================================================
+-- Infrastructure as Code (Terraform, Kubernetes)
+-- ============================================================================
+
+-- Terraform file detection
+autocmd({ "BufNewFile", "BufRead" }, {
+	group = general,
+	pattern = { "*.tf", "*.tfvars", "*.hcl" },
+	desc = "Detect Terraform files",
+	command = "setfiletype terraform",
+})
+
+-- Terraform specific settings
+autocmd("FileType", {
+	group = general,
+	pattern = { "terraform", "terraform-vars" },
+	desc = "Terraform specific settings",
+	callback = function()
+		vim.opt_local.commentstring = "# %s"
+		vim.opt_local.expandtab = true
+		vim.opt_local.shiftwidth = 2
+		vim.opt_local.tabstop = 2
+	end,
+})
+
+-- Kubernetes manifest detection (for files in K8s directories)
+autocmd("BufRead", {
+	group = general,
+	pattern = {
+		"**/k8s/**/*.yaml",
+		"**/k8s/**/*.yml",
+		"**/kubernetes/**/*.yaml",
+		"**/kubernetes/**/*.yml",
+		"**/manifests/**/*.yaml",
+		"**/manifests/**/*.yml",
+	},
+	desc = "Detect Kubernetes manifests in K8s directories",
+	callback = function()
+		vim.bo.filetype = "yaml.kubernetes"
+	end,
+})
+
+-- Also detect by content if file has k8s-specific names
+autocmd("BufRead", {
+	group = general,
+	pattern = {
+		"**/deployment*.yaml",
+		"**/service*.yaml",
+		"**/ingress*.yaml",
+		"**/configmap*.yaml",
+		"**/secret*.yaml",
+		"**/statefulset*.yaml",
+		"**/daemonset*.yaml",
+	},
+	desc = "Detect Kubernetes manifests by filename",
+	callback = function()
+		vim.bo.filetype = "yaml.kubernetes"
+	end,
+})
+
 -- -- .env file detection
 -- autocmd({ "BufNewFile", "BufRead" }, {
 -- 	group = general,

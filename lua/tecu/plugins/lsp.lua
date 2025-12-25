@@ -390,6 +390,11 @@ return {
 
 				rust = { "rustfmt" },
 
+				-- Infrastructure as Code
+				terraform = { "terraform_fmt" },
+				tf = { "terraform_fmt" },
+				hcl = { "terraform_fmt" },
+
 				-- sh = { "shfmt" },
 				["*"] = { "trim_whitespace" },
 			},
@@ -435,6 +440,10 @@ return {
 
 				bash = { "shellcheck" },
 				sh = { "shellcheck" },
+
+				-- Infrastructure as Code
+				terraform = { "tflint", "tfsec" },
+				tf = { "tflint", "tfsec" },
 				-- make = { "checkmate" },
 			}
 
