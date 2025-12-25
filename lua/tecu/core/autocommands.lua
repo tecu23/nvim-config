@@ -29,16 +29,17 @@ autocmd("TextYankPost", {
 })
 
 -- Remove trailing whitespace on save
-autocmd("BufWritePre", {
-	group = general,
-	pattern = "*",
-	desc = "Remove trailing whitespace",
-	callback = function()
-		local save_cursor = vim.fn.getpos(".")
-		vim.cmd([[%s/\s\+$//e]])
-		vim.fn.setpos(".", save_cursor)
-	end,
-})
+-- NOTE: Disabled because conform.nvim handles this with trim_whitespace formatter
+-- autocmd("BufWritePre", {
+-- 	group = general,
+-- 	pattern = "*",
+-- 	desc = "Remove trailing whitespace",
+-- 	callback = function()
+-- 		local save_cursor = vim.fn.getpos(".")
+-- 		vim.cmd([[%s/\s\+$//e]])
+-- 		vim.fn.setpos(".", save_cursor)
+-- 	end,
+-- })
 
 -- Return to last edit position when opening files
 autocmd("BufReadPost", {
@@ -109,53 +110,51 @@ autocmd("FileType", {
 -- ============================================================================
 -- Go (Golang) Specific
 -- ============================================================================
-autocmd("BufWritePre", {
-	group = golang,
-	pattern = "*.go",
-	desc = "Organize Go imports on save",
-	callback = function()
-		local params = vim.lsp.util.make_range_params()
-		params.context = { only = { "source.organizeImports" } }
-		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 1000)
-		for cid, res in pairs(result or {}) do
-			for _, r in pairs(res.result or {}) do
-				if r.edit then
-					local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
-					vim.lsp.util.apply_workspace_edit(r.edit, enc)
-				end
-			end
-		end
-	end,
-})
+-- autocmd("BufWritePre", {
+-- 	group = golang,
+-- 	pattern = "*.go",
+-- 	desc = "Organize Go imports on save",
+-- 	callback = function()
+-- 		-- Skip for large files to avoid blocking
+-- 		local line_count = vim.api.nvim_buf_line_count(0)
+-- 		if line_count > 1000 then
+-- 			return
+-- 		end
+--
+-- 		local params = vim.lsp.util.make_range_params()
+-- 		params.context = { only = { "source.organizeImports" } }
+-- 		-- Reduced timeout from 1000ms to 300ms for better responsiveness
+-- 		local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, 300)
+-- 		for cid, res in pairs(result or {}) do
+-- 			for _, r in pairs(res.result or {}) do
+-- 				if r.edit then
+-- 					local enc = (vim.lsp.get_client_by_id(cid) or {}).offset_encoding or "utf-16"
+-- 					vim.lsp.util.apply_workspace_edit(r.edit, enc)
+-- 				end
+-- 			end
+-- 		end
+-- 	end,
+-- })
 
-autocmd("BufWritePre", {
-	group = golang,
-	pattern = "*.go",
-	desc = "Format Go files on save",
-	callback = function()
-		vim.lsp.buf.format({ async = false })
-	end,
-})
-
--- Set up Go test mappings
-autocmd("FileType", {
-	group = golang,
-	pattern = "go",
-	desc = "Set up Go test keymaps",
-	callback = function()
-		-- Run test under cursor
-		vim.keymap.set(
-			"n",
-			"<leader>gt",
-			"<cmd>!go test -v -run ^%:t:r$ ./...<cr>",
-			{ buffer = true, desc = "Run Go test under cursor" }
-		)
-		-- Run all tests in package
-		vim.keymap.set("n", "<leader>gT", "<cmd>!go test -v ./...<cr>", { buffer = true, desc = "Run all Go tests" })
-		-- Generate test for function
-		vim.keymap.set("n", "<leader>gg", "<cmd>!gotests -w %<cr>", { buffer = true, desc = "Generate Go test" })
-	end,
-})
+-- -- Set up Go test mappings
+-- autocmd("FileType", {
+-- 	group = golang,
+-- 	pattern = "go",
+-- 	desc = "Set up Go test keymaps",
+-- 	callback = function()
+-- 		-- Run test under cursor
+-- 		vim.keymap.set(
+-- 			"n",
+-- 			"<leader>gt",
+-- 			"<cmd>!go test -v -run ^%:t:r$ ./...<cr>",
+-- 			{ buffer = true, desc = "Run Go test under cursor" }
+-- 		)
+-- 		-- Run all tests in package
+-- 		vim.keymap.set("n", "<leader>gT", "<cmd>!go test -v ./...<cr>", { buffer = true, desc = "Run all Go tests" })
+-- 		-- Generate test for function
+-- 		vim.keymap.set("n", "<leader>gg", "<cmd>!gotests -w %<cr>", { buffer = true, desc = "Generate Go test" })
+-- 	end,
+-- })
 
 -- ============================================================================
 -- Ruby Specific

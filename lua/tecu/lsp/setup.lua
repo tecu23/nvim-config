@@ -85,8 +85,6 @@ function M.setup()
 
 		"yamlfmt",
 
-		"gofmt",
-
 		-- "gofumpt",
 		-- "goimports",
 		-- "goimports-reviser",

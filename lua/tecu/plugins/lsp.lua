@@ -382,7 +382,7 @@ return {
 				javascriptreact = { "prettierd" },
 				typescriptreact = { "prettierd" },
 
-				go = { "gofumpt", "goimports-reviser", "goimports", "gofmt", "golines" },
+				go = { "gofmt" },
 
 				sql = { "sqlfmt" },
 
@@ -398,7 +398,8 @@ return {
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 					return
 				end
-				return { timeout_ms = 10000, lsp_fallback = true }
+				-- Reduced from 10000ms to 3000ms for faster saves
+				return { timeout_ms = 3000, lsp_fallback = true }
 			end,
 		},
 	},
@@ -422,7 +423,7 @@ return {
 
 				ruby = { "rubocop" },
 
-				go = { "revive" },
+				go = { "golangcilint" },
 
 				json = { "jsonlint" },
 
