@@ -148,21 +148,22 @@ function M.setup_autocmds()
 		end,
 	})
 
-	-- Show diagnostics on cursor hold
-	vim.api.nvim_create_autocmd("CursorHold", {
-		group = group,
-		callback = function()
-			local opts = {
-				focusable = false,
-				close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-				border = "rounded",
-				source = "always",
-				prefix = " ",
-				scope = "cursor",
-			}
-			vim.diagnostic.open_float(nil, opts)
-		end,
-	})
+	-- Show diagnostics on cursor hold (DISABLED - was causing freezes)
+	-- Use <leader>do to manually open diagnostic float instead
+	-- vim.api.nvim_create_autocmd("CursorHold", {
+	-- 	group = group,
+	-- 	callback = function()
+	-- 		local opts = {
+	-- 			focusable = false,
+	-- 			close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+	-- 			border = "rounded",
+	-- 			source = "always",
+	-- 			prefix = " ",
+	-- 			scope = "cursor",
+	-- 		}
+	-- 		vim.diagnostic.open_float(nil, opts)
+	-- 	end,
+	-- })
 end
 
 -- ============================================================================
@@ -306,6 +307,10 @@ end
 -- Setup Document Highlight
 -- ============================================================================
 function M.setup_document_highlight(bufnr)
+	-- Disabled document highlighting to prevent freezes with gopls
+	-- CursorHold events can trigger expensive LSP calls in large codebases
+	-- If you want to re-enable, uncomment the code below
+	--[[
 	local group = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = false })
 	vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
 
@@ -320,6 +325,7 @@ function M.setup_document_highlight(bufnr)
 		buffer = bufnr,
 		callback = vim.lsp.buf.clear_references,
 	})
+	--]]
 end
 
 -- ============================================================================
@@ -329,8 +335,8 @@ function M.setup_codelens(bufnr)
 	local group = vim.api.nvim_create_augroup("LspCodeLens", { clear = false })
 	vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
 
-	-- Refresh code lens on certain events
-	vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+	-- Refresh code lens on certain events (removed CursorHold to prevent freezes)
+	vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave" }, {
 		group = group,
 		buffer = bufnr,
 		callback = function()

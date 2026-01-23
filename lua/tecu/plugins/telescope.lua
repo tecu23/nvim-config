@@ -44,6 +44,19 @@ return {
 				colorscheme = {
 					enable_preview = true,
 				},
+
+				-- Add timeout to prevent freezes on large searches
+				vimgrep_arguments = {
+					"rg",
+					"--color=never",
+					"--no-heading",
+					"--with-filename",
+					"--line-number",
+					"--column",
+					"--smart-case",
+					"--hidden",
+					"--max-filesize=1M", -- Skip files larger than 1MB
+				},
 			},
 			pickers = {
 				find_files = {

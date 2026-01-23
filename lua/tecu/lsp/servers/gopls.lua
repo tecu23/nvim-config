@@ -17,7 +17,7 @@ return {
 			gofumpt = false, -- Use gofumpt formatting
 			usePlaceholders = true, -- Placeholders in completions
 			completeUnimported = true, -- Complete unimported packages
-			staticcheck = true, -- Enable staticcheck
+			staticcheck = false, -- Disabled staticcheck to improve performance (can cause freezes)
 			semanticTokens = true, -- Enable semantic tokens
 
 			-- Analyses settings
@@ -56,8 +56,8 @@ return {
 				rangeVariableTypes = true, -- Show types of range variables
 			},
 
-			-- Diagnostic settings
-			diagnosticsDelay = "250ms",
+			-- Diagnostic settings (increased delay to reduce CPU usage in monorepos)
+			diagnosticsDelay = "1000ms", -- Increased from 500ms to further reduce freezes
 			symbolMatcher = "fuzzy",
 
 			-- Build settings
