@@ -17,7 +17,7 @@ return {
 		lsp_cfg = false,
 		lsp_gofumpt = false,
 		lsp_on_attach = false,
-		lsp_codelens = true,
+		lsp_codelens = false,
 		-- DAP configuration
 		dap_debug = true,
 		dap_debug_gui = true,
@@ -41,25 +41,10 @@ return {
 	config = function(_, opts)
 		require("go").setup(opts)
 
-		-- Auto-format and organize imports on save
-		local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			pattern = "*.go",
-			callback = function()
-				require("go.format").goimports()
-			end,
-			group = format_sync_grp,
-		})
-
 		-- Golang KeyMaps
 		vim.keymap.set("n", "<leader>ggsj", "<cmd>GoAddTag json<CR>", { desc = "[G]o Add Json Struct Tags" })
 		vim.keymap.set("n", "<leader>ggsy", "<cmd>GoAddTag yaml<CR>", { desc = "[G]o Add Yaml Struct Tags" })
-		vim.keymap.set(
-			"n",
-			"<leader>ggsv",
-			"<cmd>GoAddTag validate<CR>",
-			{ desc = "[G]o Add Struct Validation" }
-		)
+		vim.keymap.set("n", "<leader>ggsv", "<cmd>GoAddTag validate<CR>", { desc = "[G]o Add Struct Validation" })
 
 		vim.keymap.set("n", "<leader>ggcmt", "<cmd>GoCmt<CR>", { desc = "[G]o Generate Doc Comments" })
 		vim.keymap.set("n", "<leader>gge", "<cmd>GoIfErr<CR>", { desc = "[G]o Generate Error" })

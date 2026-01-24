@@ -382,7 +382,7 @@ return {
 				javascriptreact = { "prettierd" },
 				typescriptreact = { "prettierd" },
 
-				go = { "gofmt" },
+				-- go = { "gofmt" },  -- Disabled: using gopls formatting to match VS Code
 
 				sql = { "sqlfmt" },
 
